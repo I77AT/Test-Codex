@@ -4,9 +4,9 @@ This repository contains a simple Telegram bot example. It responds to the `/abo
 
 ## Setup
 
-1. Install the required library:
+1. Install the required library (version 20 or later):
    ```bash
-   pip install python-telegram-bot
+   pip install -U python-telegram-bot
    ```
 2. Replace the `TOKEN` value in `bot.py` with your bot's token from BotFather.
 
