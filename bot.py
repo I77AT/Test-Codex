@@ -40,10 +40,23 @@ async def about(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def forwarded(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     message = update.message
-    if message.forward_from:
-        await _send_user_info(update, context, message.forward_from)
-    elif message.forward_from_chat:
-        await _send_chat_info(update, context, message.forward_from_chat)
+    origin = getattr(message, "forward_origin", None)
+    if origin:
+        user = getattr(origin, "from_user", None)
+        chat = getattr(origin, "chat", None) or getattr(origin, "from_chat", None)
+        if user:
+            await _send_user_info(update, context, user)
+        elif chat:
+            await _send_chat_info(update, context, chat)
+        return
+
+    # Compatibility with older attributes
+    user = getattr(message, "forward_from", None)
+    chat = getattr(message, "forward_from_chat", None)
+    if user:
+        await _send_user_info(update, context, user)
+    elif chat:
+        await _send_chat_info(update, context, chat)
 
 def main() -> None:
     application = ApplicationBuilder().token(TOKEN).build()
