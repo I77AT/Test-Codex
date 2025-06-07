@@ -1,7 +1,6 @@
 # Test-Codex
 
-This repository contains a simple Telegram bot example. It responds to the `/about` command by sending the user's first available profile photo along with their first name, last name and Telegram ID.
-If you forward a message or file to the bot, it will reply with details about the original sender (forwards from users) or the original chat/channel.
+This repository contains a simple Telegram bot example. It replies to **any** message you send with a summary of that message. The summary includes basic information about the message itself, the sender and the chat. If a message was forwarded, the bot also reports the original source.
 
 ## Setup
 
@@ -18,5 +17,4 @@ Run the bot with:
 python bot.py
 ```
 
-Send `/about` to the bot in Telegram to receive your profile information.
-You can also forward any message or file to the bot to get information about the original author or chat.
+Send any message (text, photo, sticker, document, etc.) to the bot and it will reply with a detailed summary of that message and its sender.
